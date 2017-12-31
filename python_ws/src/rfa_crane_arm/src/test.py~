@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+# coding:utf-8
+"""
+    crane_arm.py - move crane arm according to predefined gestures
+
+"""
+
+import rospy
+import codecs
+from std_msgs.msg import Float64
+
+class Loop:
+    def __init__(self):
+	def callback_cmd_left (data_cmd):
+		rospy.loginfo(rospy.get_caller_id() + "I heard that cmd is %d", data_cmd)
+		self.cmd = data_cmd
+	rospy.Subscriber("cmd", Float64, callback_cmd_left)
+	rospy.loginfo("Subscribe to topic cmd.....")
+	self.a = '你好，欢迎来到321'
+	self.a = self.a.decode('gb2312').encode('utf-8') #解码，能够把中文字符串写入txt
+	self.file_object = codecs.open('/home/isilab/read.txt','wr')
+	
+	self.file_object.write(self.a)
+	self.file_object.close()
+	rospy.sleep(5)
+	self.cmd = '7'
+	while not rospy.is_shutdown():
+		self.file_object = open('/home/isilab/hydro/1.txt','r+')
+		self.cmd = self.file_object.read()
+		
+#		finally:
+		self.file_object.close()
+		rospy.loginfo("cmd = %s", self.cmd)
+		rospy.sleep(4)
+		if self.cmd == '2':
+			self.file_object = open('/home/isilab/read.txt','wr')
+			self.b = '前进'
+			self.b = self.b.decode('gb2312').encode('utf-8')
+			self.file_object.write(self.b)
+			self.file_object.close()
+			self.cmd = '7'
+			rospy.loginfo("test the voice....")
+		if self.cmd == '4':
+			self.file_object = open('/home/isilab/read.txt','wr')
+			self.b = '右转'
+			self.b = self.b.decode('gb2312').encode('utf-8')
+			self.file_object.write(self.b)
+			self.file_object.close()
+			self.cmd = 7
+			rospy.loginfo("test the voice....")
+		if self.cmd == '5':
+			self.file_object = open('/home/isilab/read.txt','wr')
+			self.b = '我到了'
+			self.b = self.b.decode('gb2312').encode('utf-8')
+			self.file_object.write(self.b)
+			self.file_object.close()
+			self.cmd = '7'
+			rospy.loginfo("test the voice....")
+		if self.cmd == '6':
+			self.file_object = open('/home/isilab/read.txt','wr')
+			self.b = '请喝水'
+			self.b = self.b.decode('gb2312').encode('utf-8')
+			self.file_object.write(self.b)
+			self.file_object.close()
+			self.file_clear = open('/home/isilab/hydro/1.txt','wr')
+			self.cmd = '7'
+			self.file_clear.write(self.cmd)
+			rospy.loginfo("test the voice....")
+    def cleanup(self):
+        rospy.loginfo("Shutting down left arm....")
+
+if __name__=="__main__":
+    rospy.init_node('turtlebot_arm')
+    try:
+        Loop()
+        rospy.spin()
+    except rospy.ROSInterruptException:
+        pass
+
+

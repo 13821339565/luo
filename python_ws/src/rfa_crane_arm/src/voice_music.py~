@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+# coding=utf-8
+import time
+import os
+import rospy
+
+
+def rest(t): #目标时刻与当前时刻相差多少分
+  h,m = time.localtime()[3:5] #获取当前时刻 (时,分)
+  x,y = t.split(':')
+  return 60*((int(x)-h)%24)+(int(y)-m)
+
+def look(t): #看看到时间没
+  if rest(t)==0: #时刻已到,播放音乐
+    print '目标时刻到了'
+    os.system("totem /home/lzd/catkin_lzd/src/voice_weather/likeyou.mp3") # 播放器(totem)和音乐文件(The_Snow.mp3)需要用户指定
+
+  else: #时刻未到,睡30秒再看看时间
+    h,m = time.localtime()[3:5]
+    print "现在时刻 %s时%s分， 离目标时刻还有%s分钟" %(h,m,rest(t))
+    time.sleep(30)
+    look(t)
+
+t="17:33" #目标时刻需要用户指定
+print "注意：该程序时间格式是24小时制\n例如下午2点15分,需要写成 '14:15'\n如果写成 '2:15' 将被视作凌晨2时15分"
+look(t)
+

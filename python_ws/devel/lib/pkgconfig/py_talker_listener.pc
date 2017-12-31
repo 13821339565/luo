@@ -1,0 +1,8 @@
+prefix=/home/luo/python_ws/devel
+
+Name: py_talker_listener
+Description: Description of py_talker_listener
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/luo/python_ws/devel/lib 
+Requires: 

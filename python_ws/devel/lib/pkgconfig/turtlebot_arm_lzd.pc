@@ -1,0 +1,8 @@
+prefix=/home/luo/python_ws/devel
+
+Name: turtlebot_arm_lzd
+Description: Description of turtlebot_arm_lzd
+Version: 1.0.0
+Cflags: -I/home/luo/python_ws/devel/include
+Libs: -L/home/luo/python_ws/devel/lib 
+Requires: message_runtime

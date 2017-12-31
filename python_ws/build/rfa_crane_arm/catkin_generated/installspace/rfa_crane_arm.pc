@@ -1,0 +1,8 @@
+prefix=/home/luo/python_ws/install
+
+Name: rfa_crane_arm
+Description: Description of rfa_crane_arm
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/luo/python_ws/install/lib 
+Requires: 

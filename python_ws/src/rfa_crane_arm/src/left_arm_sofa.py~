@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+# coding=utf-8
+#沙发喝茶
+"""
+    crane_arm.py - move crane arm according to predefined gestures
+
+"""
+
+import rospy
+from std_msgs.msg import Float64
+import sys
+
+class Loop:
+    def __init__(self):
+		rospy.on_shutdown(self.cleanup)
+		# publish command message to joints/servos of arm
+		self.file_object = open('/home/isi/read.txt','wr')
+		self.a = '贵宾请喝茶，还有什么需要服务的吗'
+		self.a = self.a.decode('gb2312').encode('utf-8') #解码，能够把中文字符串写入txt
+		self.file_object.write(self.a)
+		self.file_object.close()
+		rospy.sleep(5)
+		sys.exit()
+		
+    def cleanup(self):
+        rospy.loginfo("Shutting down left arm....")
+
+if __name__=="__main__":
+    rospy.init_node('turtlebot_arm')
+    try:
+        Loop()
+        rospy.spin()
+    except rospy.ROSInterruptException:
+        pass
+
+

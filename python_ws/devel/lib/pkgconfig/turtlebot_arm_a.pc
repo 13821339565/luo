@@ -1,0 +1,8 @@
+prefix=/home/luo/python_ws/devel
+
+Name: turtlebot_arm_a
+Description: Description of turtlebot_arm_a
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/luo/python_ws/devel/lib 
+Requires: 

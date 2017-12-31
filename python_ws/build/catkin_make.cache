@@ -1,0 +1,2 @@
+dynamixel_motor/dynamixel_controllers:dynamixel_motor/dynamixel_driver:dynamixel_motor/dynamixel_motor:dynamixel_motor/dynamixel_msgs:dynamixel_motor/dynamixel_tutorials:rfa_crane_arm
+-DCATKIN_DEVEL_PREFIX=/home/luo/python_ws/devel -DCMAKE_INSTALL_PREFIX=/home/luo/python_ws/install -G Unix Makefiles

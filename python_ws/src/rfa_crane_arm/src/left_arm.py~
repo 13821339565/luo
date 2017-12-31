@@ -1,0 +1,108 @@
+#!/usr/bin/env python
+# coding=utf-8
+"""
+    crane_arm.py - move crane arm according to predefined gestures
+
+"""
+
+import rospy
+from std_msgs.msg import Float64
+import sys
+
+class Loop:
+    def __init__(self):
+		rospy.on_shutdown(self.cleanup)
+		# publish command message to joints/servos of arm
+		self.file_object = open('/home/isi/read.txt','wr')
+		self.a = '机器人动右手'
+		self.a = self.a.decode('gb2312').encode('utf-8') #解码，能够把中文字符串写入txt
+		self.file_object.write(self.a)
+		self.file_object.close()
+		rospy.sleep(5)
+		self.left_arm_joint1 = rospy.Publisher('/left_arm_shoulder_pan_joint/command',Float64)
+		self.left_arm_joint2 = rospy.Publisher('/left_arm_shoulder_lift_joint/command',Float64)
+		self.left_arm_joint3 = rospy.Publisher('/left_arm_elbow_flex_joint/command',Float64)
+		self.left_arm_joint4 = rospy.Publisher('/left_arm_wrist_flex_joint/command',Float64)
+		self.left_arm_joint5 = rospy.Publisher('/left_gripper_joint/command',Float64)
+		self.left_arm_joint6 = rospy.Publisher('/left_tool_joint/command',Float64)
+		self.left_arm_pos1 = Float64()
+		self.left_arm_pos2 = Float64()
+		self.left_arm_pos3 = Float64()
+		self.left_arm_pos4 = Float64()
+		self.left_arm_pos5 = Float64()
+		self.left_arm_pos6 = Float64()
+		rospy.loginfo("Connecting to left arm....")
+		#	self.file_object = open('/home/isi/read.txt','wr')
+		#	self.file_object.write("欢迎来到长城公司")
+		# initial gesture 
+		self.left_arm_pos1 = 0
+
+		self.left_arm_joint1.publish(self.left_arm_pos1)
+		rospy.sleep(2)
+		rospy.loginfo("left arm: Gesture 1....")
+
+		# raise hand
+		self.left_arm_pos1 = 0.3925
+		self.left_arm_joint1.publish(self.left_arm_pos1)
+		rospy.sleep(2)
+		rospy.loginfo("left arm: Gesture 2....")
+
+		self.left_arm_pos1 = 1
+		self.left_arm_joint1.publish(self.left_arm_pos1)
+		rospy.sleep(2)
+		rospy.loginfo("left arm: Gesture 3....")
+
+		self.left_arm_pos1 = 0.3925
+		self.left_arm_joint1.publish(self.left_arm_pos1)
+		rospy.sleep(2)
+		rospy.loginfo("left arm: Gesture 4....")
+		# initial gesture 
+		self.left_arm_pos1 = 0
+
+		self.left_arm_joint1.publish(self.left_arm_pos1)
+		rospy.sleep(2)
+		rospy.loginfo("left arm: Gesture 5....")
+
+		self.left_arm_pos1 = -0.3925
+
+		self.left_arm_joint1.publish(self.left_arm_pos1)
+		rospy.sleep(2)
+		rospy.loginfo("left arm: Gesture 6....")
+
+		self.left_arm_pos1 = -1
+
+		self.left_arm_joint1.publish(self.left_arm_pos1)
+		rospy.sleep(2)
+		rospy.loginfo("left arm: Gesture 7....")
+
+		self.left_arm_pos1 = -0.3925
+
+		self.left_arm_joint1.publish(self.left_arm_pos1)
+		rospy.sleep(2)
+		rospy.loginfo("left arm: Gesture 8....")
+
+		self.left_arm_pos1 = 0
+
+		self.left_arm_joint1.publish(self.left_arm_pos1)
+		rospy.sleep(2)
+		rospy.loginfo("left arm: Gesture 9 and end....")
+		self.file_object = open('/home/isi/read.txt','wr')
+		self.a = '机器人动右手结束，开始下一命令'
+		self.a = self.a.decode('gb2312').encode('utf-8') #解码，能够把中文字符串写入txt
+		self.file_object.write(self.a)
+		self.file_object.close()
+		rospy.sleep(7)
+		sys.exit()
+		
+    def cleanup(self):
+        rospy.loginfo("Shutting down left arm....")
+
+if __name__=="__main__":
+    rospy.init_node('turtlebot_arm')
+    try:
+        Loop()
+        rospy.spin()
+    except rospy.ROSInterruptException:
+        pass
+
+

@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+# coding=utf-8
+import os
+import rospy
+def play():
+  print '主人，心情怎么样，我给你放首歌吧'  
+  x = raw_input("host:")
+  if x=='sad': #满足条件播放音乐
+    print '开始播放相声病从口入'
+    os.system("totem /home/lzd/music/crosstalk.mp3") # 播放指定路径下的音乐-病从口入
+  elif x=='happy':
+    print '开始播放音乐传奇'
+    os.system("totem /home/lzd/music/legend.mp3") # 播放指定路径下的音乐-传奇
+  elif x=='angry':
+    print '开始播放音乐小幸运'
+    os.system("totem /home/lzd/music/small_lucky.mp3") # 播放指定路径下的音乐-小幸运
+  elif x=='miss':
+    print '开始播放音乐一路上有你'
+    os.system("totem /home/lzd/music/With_you_all_the_way.mp3") # 播放指定路径下的音乐-一路上有你
+  elif x=='sorrow':
+    print '开始播放音乐You raise me up'
+    os.system("totem /home/lzd/music/You_raise_me_up.mp3") # 播放指定路径下的音乐-You raise me up
+  else:
+    print '请继续输入'
+
+class Loop:
+  while not rospy.is_shutdown():
+    play()
+    print '调用play()'
+if __name__=="__main__":
+  rospy.init_node('voice_music1')
+  try:
+    Loop()
+    rospy.spin()
+  except rospy.ROSInterruptException:
+    pass

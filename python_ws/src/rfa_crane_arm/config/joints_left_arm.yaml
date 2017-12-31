@@ -1,0 +1,79 @@
+joints: ['left_arm_shoulder_pan_joint', 'left_arm_shoulder_lift_joint', 'left_arm_elbow_flex_joint', 'left_arm_wrist_flex_joint', 'left_gripper_joint', 'left_tool_joint']
+
+left_arm_shoulder_pan_joint:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: left_arm_shoulder_pan_joint
+    joint_speed: 0.75
+    motor:
+        id: 7
+        init: 512
+        min: 0
+        max: 1024
+
+left_arm_shoulder_lift_joint:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: left_arm_shoulder_lift_joint
+    joint_speed: 0.75
+    motor:
+        id: 8
+        init: 512
+        min: 0
+        max: 1024
+
+left_arm_elbow_flex_joint:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: left_arm_elbow_flex_joint
+    joint_speed: 0.75
+    motor:
+        id: 9
+        init: 512
+        min: 0
+        max: 1024
+
+left_arm_wrist_flex_joint:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: left_arm_wrist_flex_joint
+    joint_speed: 0.75
+    motor:
+        id: 10
+        init: 512
+        min: 0
+        max: 1024
+
+left_gripper_joint:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: left_gripper_joint
+    joint_speed: 0.35
+    motor:
+        id: 11
+        init: 512
+        min: 0
+        max: 1024
+
+left_tool_joint:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: left_tool_joint
+    joint_speed: 0.35
+    motor:
+        id: 12
+        init: 512
+        min: 0
+        max: 1024
